@@ -40,9 +40,8 @@ def new_blog(id):
     # render_template('newblog.html')
     blog=Todo.query.get_or_404(id)
 
-    if methods=='POST':
+    if request.method=='POST':
         blog.content=request.form['blog_content']
-        
         try:
             db.session.commit()
             return redirect('/')
@@ -51,9 +50,26 @@ def new_blog(id):
     else:
         return render_template('newblog.html', blog=blog)
 
-@app.route('/viewblog/<int:id>')
+@app.route('/viewblog/<int:id>', methods=["GET","POST"])
 def viewblog(id):
-    return 'this is the blog'
+
+    blog = Todo.query.get_or_404(id)
+
+    if request.method=='POST':
+        return redirect('/')
+    else:
+        return render_template("blogpost.html",blog=blog)
+    
+@app.route('/delete/<int:id>')
+def delete(id):
+    blog_to_delete=Todo.query.get_or_404(id)
+
+    try:
+        db.session.delete(blog_to_delete)
+        db.session.commit()
+        return redirect('/')
+    except:
+        return 'There was a problem deleting that task'
 
 if __name__ == '__main__':
     app.run(debug=True)
