@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<div class ='header' style="border: solid;">
+    <h1 style="font-size: 30px;">OfentseBlogs!</h1>
+    <h3>Edit your blog</h3>
+    </div>
+{% endblock head %}
+
+{% block body %}
+<div class = 'blog header'>
+    <h2>{{blog.title}}</h2>
+    <p>Posted on {{blog.date_posted}}</p>
+</div>
+<br>
+<div class = 'blog body'>
+    <form action='/' method="post">
+        <input type="text" , name="title" , id="title" placeholder= {{blog.content}}>
+    </form>
+</div>
+{% endblock body %}

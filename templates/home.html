@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<div class='header' id="header">
+    <h1>Welcome to OfentseBlogs!</h1>
+    <h3>Your go to blog space to view, edit, and delete blogs</h3>
+</div>
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    <h1>Blog Master</h1>
+
+    {% if blogs|length<1 %} <h4 style="text-align: centre;"> There are no blogs. Please add some below</h4>
+
+        {% else %}
+
+        <table>
+            <tr>
+                <th>Blog</th>
+                <th>Posted</th>
+                <th>Options</th>
+            </tr>
+            {% for blog in blogs %}
+            <tr>
+                <td>{{ blog.title }}</td>
+                <td>{{ blog.date_posted.date() }}</td>
+                <td>
+                    <a href="/view/{{blog.id}}">View</a>
+                    <br>
+                    <a href="/edit/{{blog.id}}">Edit</a>
+                    <a href="/delete/{{blog.id}}">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+
+        </table>
+        {% endif %}
+
+        <form action='/' method="post">
+            <input type="text" , name="title" , id="title" placeholder="Name your new blog">
+            <input type="submit" , name="add_blog" , value="Add Blog">
+        </form>
+
+</div>
+{% endblock %}

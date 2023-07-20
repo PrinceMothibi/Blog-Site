@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<div class ='header' style="border: solid;">
+    <h1 style="font-size: 30px;">Welcome to OfentseBlogs!</h1>
+    <h3>Your go to blog space to view, edit, and delete blogs</h3>
+    </div>
+{% endblock head %}
+
+{% block body %}
+<div class="blog_entry">
+    <h2>{{blog.title}}</h2>
+    <br>
+    <form action="/newblog/{{blog.id}}/" method="post">
+        <input type="text" name="blog_content" id="blog_content" value="{{blog.content}}">
+        <input type="submit" value="New Blog">
+    </form>
+</div>
+<div>
+    <form action="/newblog/{{blog.id}}/" method = 'quit'>
+        <input type="button" name="quit" value="quit">
+    </form>
+</div>
+{% endblock body %}
