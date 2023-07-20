@@ -54,11 +54,7 @@ def new_blog(id):
 def viewblog(id):
 
     blog = Todo.query.get_or_404(id)
-
-    if request.method=='POST':
-        return redirect('/')
-    else:
-        return render_template("blogpost.html",blog=blog)
+    return render_template("blogpost.html",blog=blog)
     
 @app.route('/delete/<int:id>')
 def delete(id):
